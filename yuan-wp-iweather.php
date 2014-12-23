@@ -25,7 +25,7 @@ License: GPL2
     along with this program; if not, write to the Free Software
     Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
-    function get_the_json_object(){
+    function yl_iw_get_the_json_object(){
     	$url = 'http://api.openweathermap.org/data/2.5/weather?q=Brisbane,AU';
     	$args = array(
     		'hearder'=> array('Content-type' => 'application/json')
@@ -42,30 +42,30 @@ License: GPL2
     	}
     }
 
-    function decode_json_object($json_object){
+    function yl_iw_decode_json_object($json_object){
     	return json_decode( $json_object, true);
     }
 
-    function convertToCen($fTemp){
+    function yl_iw_convertToCen($fTemp){
     	return $cTemp = round($fTemp-273.15);
     }
 
-    function weather_show(){
-    	if (!get_the_json_object()) {
+    function yl_iw_weather_show(){
+    	if (!yl_iw_get_the_json_object()) {
     		echo "Cannot retrieve weather information";
     	}
     	else
     	{
-    		$weather = decode_json_object(get_the_json_object());
+    		$weather = yl_iw_decode_json_object(yl_iw_get_the_json_object());
 		//var_dump(get_the_json_object());
 		//var_dump($weather);
     		if($weather['cod']== 200){
     			echo '<div class="weather_bar">';
     			echo "<span>".$weather['name'].": ".$weather['weather'][0]['description']."</span>";
-    			echo "<span>Current Temperature: ".convertToCen($weather['main']['temp'])."&#176"."C</span>";
+    			echo "<span>Current Temperature: ".yl_iw_convertToCen($weather['main']['temp'])."&#176"."C</span>";
     			echo "Humidity: ".$weather['main']['humidity']."% ";
-    			echo "<span>High: ".convertToCen($weather['main']['temp_min'])."&#176"."C</span>";
-    			echo "<span>Low: ".convertToCen($weather['main']['temp_max'])."&#176"."C</span>";
+    			echo "<span>High: ".yl_iw_convertToCen($weather['main']['temp_min'])."&#176"."C</span>";
+    			echo "<span>Low: ".yl_iw_convertToCen($weather['main']['temp_max'])."&#176"."C</span>";
     			echo '</div>';
     		}else{
     			echo $weather['message'];
@@ -73,9 +73,9 @@ License: GPL2
     	}
     }
 
-    add_action( 'admin_notices', 'weather_show' );
+    add_action( 'admin_notices', 'yl_iw_weather_show' );
 
-    function weather_bar_css() {
+    function yl_iw_weather_bar_css() {
     	echo "
     	<style type='text/css'>
     		.weather_bar {
@@ -97,7 +97,7 @@ License: GPL2
     	</style>
     	";
     }
-    add_action( 'admin_head', 'weather_bar_css' );
+    add_action( 'admin_head', 'yl_iw_weather_bar_css' );
 
 
 
