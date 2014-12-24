@@ -25,6 +25,13 @@ License: GPL2
     along with this program; if not, write to the Free Software
     Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
+    define( 'IWEATHER_VERSION', '1.0' );
+    define( 'IWEATHER__MINIMUM_WP_VERSION', '3.1' );
+    define( 'IWEATHER__PLUGIN_URL', plugin_dir_url( __FILE__ ) );
+    define( 'IWEATHER__PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
+
+    require_once IWEATHER__PLUGIN_DIR . 'admin/admin.php';
+    
     function yl_iw_get_the_json_object(){
     	$url = 'http://api.openweathermap.org/data/2.5/weather?q=Brisbane,AU';
     	$args = array(
